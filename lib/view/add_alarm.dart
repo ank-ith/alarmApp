@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../model/alarm_model.dart';
+import '../provider/alarm_provider.dart';
+
 class AddAlarm extends StatefulWidget {
-  const AddAlarm({super.key});
+  const AddAlarm({super.key, this.model});
+
+  final Model? model;
 
   @override
   State<AddAlarm> createState() => _AddAlarmState();
@@ -31,12 +36,7 @@ class _AddAlarmState extends State<AddAlarm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.check),
-          )
-        ],
+        actions: [],
         automaticallyImplyLeading: true,
         title: Text(
           'add alarm',
@@ -53,10 +53,10 @@ class _AddAlarmState extends State<AddAlarm> {
             width: MediaQuery.of(context).size.height,
             child: Center(
               child: CupertinoDatePicker(
-                onDateTimeChanged: (va) {
-                  dateTime = DateFormat().add_jms().format(va);
-                  milliseconds = va.microsecondsSinceEpoch;
-                  notificationTime = va;
+                onDateTimeChanged: (dateTimeValue) {
+                  dateTime = DateFormat().add_jms().format(dateTimeValue);
+                  milliseconds = dateTimeValue.microsecondsSinceEpoch;
+                  notificationTime = dateTimeValue;
                   print(dateTime);
                 },
               ),
@@ -92,13 +92,43 @@ class _AddAlarmState extends State<AddAlarm> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Random random = Random();
-                    int randomNumber = random.nextInt(100);
-                    //context.read<AlarmProvider>().setData();
-                    //context.read()<AlarmProvider>().ScheduleNotifcation(notificationTime!,randomNumber);
-                   // Navigator.pop(context);
+                    if (widget.model == null) {
+                      //run if there is a model present i.e runs for edit functionality
+                      Random random = Random();
+                      int randomNumber = random.nextInt(100);
+
+                      context.read<AlarmProvider>().SetAlarm(
+                          controller.text,
+                          dateTime!,
+                          true,
+                          name!,
+                          randomNumber,
+                          milliseconds!,
+                          notificationTime!);
+                      // context.read<AlarmProvider>().SetData();
+
+                      // context
+                      //     .read<AlarmProvider>()
+                      //     .scheduleNotification(notificationTime!, randomNumber);
+
+                      Navigator.pop(context);
+                    } else {
+                      //runs for setting a new alarm
+                      Random random = Random();
+                      int randomNumber = random.nextInt(100);
+                      context.read<AlarmProvider>().editAlarm(
+                          widget.model!,
+                          controller.text,
+                          dateTime ?? widget.model!.dateTime!,
+                          true,
+                          name!,
+                          randomNumber,
+                          widget.model!.milliseconds!,
+                          notificationTime);
+                      Navigator.pop(context);
+                    }
                   },
-                  child: Text('Set Alarm'))
+                  child: const Text('Set Alarm'))
             ],
           )
         ],
