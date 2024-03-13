@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:alarmapp/view/alarm_screen.dart';
+//import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
@@ -104,7 +105,7 @@ class AlarmProvider extends ChangeNotifier {
         ));
   }
 
-  showNotification() async {
+  Future<void>  showNotification() async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       'your channel id',
@@ -123,11 +124,13 @@ class AlarmProvider extends ChangeNotifier {
   }
 
   scheduleNotification(DateTime dateTime, int randomNum) async {
+    //random number is set as notification id
     int newtime =
         dateTime.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch;
-    print(dateTime.millisecondsSinceEpoch);
-    print(DateTime.now().millisecondsSinceEpoch);
-    print(newtime);
+    // print(dateTime.millisecondsSinceEpoch);
+    // print(DateTime.now().millisecondsSinceEpoch);
+    // print(newtime);
+    //await AndroidAlarmManager.oneShotAt(dateTime, randomNum, showNotification());
     await flutterLocalNotificationsPlugin!.zonedSchedule(
         randomNum,
         'Alarm Clock',

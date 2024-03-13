@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
           height: MediaQuery
               .of(context)
               .size
-              .height * 0.25,
+              .height * 0.3,
           width: double.infinity,
           decoration: BoxDecoration(
               color: AppColor.textColor,
@@ -211,7 +211,6 @@ class _MyAppState extends State<MyApp> {
                                                   : alarm.modeList[index].check,
                                               onChanged: (v) {
                                                 alarm.editSwitch(index, v);
-
                                                 alarm.cancelNotification(
                                                     alarm.modeList[index].id!);
                                               }),
