@@ -11,17 +11,16 @@ FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await AndroidAlarmManager.initialize();
+ // await AndroidAlarmManager.initialize();
   tz.initializeTimeZones();
   flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
       AndroidFlutterLocalNotificationsPlugin>()!
       .requestNotificationsPermission();
 
-
   runApp(
     ChangeNotifierProvider(
-    create: (contex) => AlarmProvider(),
+    create: (context) => AlarmProvider(),
    child: const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MyApp(),

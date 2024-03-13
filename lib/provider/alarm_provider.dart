@@ -84,9 +84,9 @@ class AlarmProvider extends ChangeNotifier {
   initUtilize(con) async {
     context = con;
     var androidInitilize = AndroidInitializationSettings('@mipmap/ic_launcher');
-    var iOsinitilize = DarwinInitializationSettings();
+    //var iOsinitilize = DarwinInitializationSettings();
     var initilizationsSettings =
-        InitializationSettings(android: androidInitilize, iOS: iOsinitilize);
+        InitializationSettings(android: androidInitilize);
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     await flutterLocalNotificationsPlugin!.initialize(initilizationsSettings,
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
@@ -127,10 +127,6 @@ class AlarmProvider extends ChangeNotifier {
     //random number is set as notification id
     int newtime =
         dateTime.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch;
-    // print(dateTime.millisecondsSinceEpoch);
-    // print(DateTime.now().millisecondsSinceEpoch);
-    // print(newtime);
-    //await AndroidAlarmManager.oneShotAt(dateTime, randomNum, showNotification());
     await flutterLocalNotificationsPlugin!.zonedSchedule(
         randomNum,
         'Alarm Clock',
@@ -138,8 +134,8 @@ class AlarmProvider extends ChangeNotifier {
         tz.TZDateTime.now(tz.local).add(Duration(milliseconds: newtime)),
         const NotificationDetails(
             android: AndroidNotificationDetails(
-                'your channel id', 'your channel name',
-                channelDescription: 'your channel description',
+                'alarm notif', 'alarm notif',
+                channelDescription: 'channel for alarm notif',
                 sound: RawResourceAndroidNotificationSound("alarm"),
                 autoCancel: false,
                 playSound: true,

@@ -71,15 +71,12 @@ class _MyAppState extends State<MyApp> {
       ),
       body: Column(children: [
         Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 0.3,
+          height: MediaQuery.of(context).size.height * 0.3,
           width: double.infinity,
           decoration: BoxDecoration(
               color: AppColor.textColor,
               borderRadius:
-              const BorderRadius.vertical(bottom: Radius.circular(10))),
+                  const BorderRadius.vertical(bottom: Radius.circular(10))),
           child: Card(
             elevation: 0,
             color: AppColor.textColor,
@@ -108,8 +105,7 @@ class _MyAppState extends State<MyApp> {
                     ],
                   ),
                   Text(
-                      '${_weather?.temp.toString()}\u00B0C\t|\t${_weather
-                          ?.condition}' ??
+                      '${_weather?.temp.toString()}\u00B0C\t|\t${_weather?.condition}' ??
                           'Nothing to show',
                       style: const TextStyle(fontSize: 25)),
                   Text(
@@ -123,132 +119,130 @@ class _MyAppState extends State<MyApp> {
         ),
         Expanded(
             child: ListView(children: [
-              Consumer<AlarmProvider>(builder: (context, alarm, child) {
-                return SizedBox(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.5,
-                    child: ListView.builder(
-                        itemCount: alarm.modeList.length,
-                        itemBuilder: (BuildContext, index) {
-                          return Padding(
+          Consumer<AlarmProvider>(builder: (context, alarm, child) {
+            return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: ListView.builder(
+                    itemCount: alarm.modeList.length,
+                    itemBuilder: (BuildContext, index) {
+                      return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColor.containerColor,
+                            ),
+                            child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height * 0.1,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColor.containerColor,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => //to edit alarm using selected Model
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (context) => //to edit alarm using selected Model
                                                         AddAlarm(
                                                             model:
-                                                            alarm
-                                                                .modeList[index]),
-                                                  ));
-                                            },
-                                            child: Row(
+                                                                alarm.modeList[
+                                                                    index]),
+                                              ));
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Column(
                                               children: [
                                                 Text(
                                                   alarm.modeList[index]
                                                       .dateTime!,
                                                   style: const TextStyle(
-                                                      fontWeight: FontWeight
-                                                          .bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 16,
                                                       color: Colors.black),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: 8.0),
-                                                  child: Text(alarm
-                                                      .modeList[index].label
-                                                      .toString()),
+                                                Row(mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Icon(Icons.label_important_outline),
+                                                    Text(
+                                                        alarm
+                                                            .modeList[index].label
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 16,
+                                                            color: Colors.black)),
+                                                  ],
                                                 ),
                                               ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 90,
-                                          ),
-                                          IconButton(
-                                              onPressed: () {
-                                                alarm.deleteAlarm(
-                                                    alarm.modeList[index]);
-                                              },
-                                              icon: const Icon(
-                                                Icons.delete,
-                                              )),
-
-                                          Switch(
-                                              activeColor: AppColor.buttonColor,
-                                              value: (alarm.modeList[index]
-                                                  .milliseconds! <
-                                                  DateTime
-                                                      .now()
-                                                      .microsecondsSinceEpoch) //to automatically trigger switch after passing the set time
-                                                  ? false
-                                                  : alarm.modeList[index].check,
-                                              onChanged: (v) {
-                                                alarm.editSwitch(index, v);
-                                                alarm.cancelNotification(
-                                                    alarm.modeList[index].id!);
-                                              }),
-                                        ],
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                      // Text(alarm.modeList[index].when!),
+                                      const SizedBox(
+                                        width: 90,
+                                      ),
+                                      IconButton(
+                                          onPressed: () {
+                                            alarm.deleteAlarm(
+                                                alarm.modeList[index]);
+                                          },
+                                          icon: const Icon(
+                                            Icons.delete,
+                                          )),
+                                      Switch(
+                                          activeColor: AppColor.buttonColor,
+                                          value: (alarm.modeList[index]
+                                                      .milliseconds! <
+                                                  DateTime.now()
+                                                      .microsecondsSinceEpoch) //to automatically trigger switch after passing the set time
+                                              ? false
+                                              : alarm.modeList[index].check,
+                                          onChanged: (v) {
+                                            alarm.editSwitch(index, v);
+                                            alarm.cancelNotification(
+                                                alarm.modeList[index].id!);
+                                          }),
                                     ],
                                   ),
-                                ),
-                              ));
-                        }));
-              }),
-            ])),
+                                  // Text(alarm.modeList[index].when!),
+                                ],
+                              ),
+                            ),
+                          ));
+                    }));
+          }),
+        ])),
       ]),
       bottomNavigationBar: Container(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.1,
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(30), topRight: Radius.circular(30)),
             color: AppColor.appBarColor),
         child: Center(
             child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddAlarm()));
-              },
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: AppColor.buttonColor, shape: BoxShape.circle),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Icon(Icons.add),
-                  )),
-            )),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AddAlarm()));
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                  color: AppColor.buttonColor, shape: BoxShape.circle),
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Icon(Icons.add),
+              )),
+        )),
       ),
     );
   }
