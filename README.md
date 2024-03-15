@@ -54,3 +54,12 @@ Contributions are welcome! If you encounter any issues or have suggestions for i
 This project is licensed under the [MIT License](LICENSE).
 
 
+![photo_2024-03-15_19-55-33](https://github.com/ank-ith/alarmApp/assets/130245411/e7dfef72-be0e-46ba-bfe6-52fcb8b60068)
+
+![photo_2024-03-15_19-55-33 (2)](https://github.com/ank-ith/alarmApp/assets/130245411/840ef2c7-8b9f-4f8d-900d-717d153c1239)
+
+![photo_2024-03-15_19-56-00](https://github.com/ank-ith/alarmApp/assets/130245411/bc03ced7-9205-4000-9304-9cdfaea59849)
+
+
+
+
