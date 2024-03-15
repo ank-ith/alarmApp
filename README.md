@@ -46,7 +46,7 @@ Contributions are welcome! If you encounter any issues or have suggestions for i
 
 ## Credits
 
-- This app uses [Weather API](https://weatherapi.com/) to fetch weather data.
+- This app uses [OPENWEATHERMAP](https://openweathermap.org/) to fetch weather data.
 - Alarm feature inspired by Flutter's [alarm_manager](https://pub.dev/packages/alarm_manager) plugin.
 
 ## License
